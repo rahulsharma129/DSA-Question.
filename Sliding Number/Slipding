@@ -47,3 +47,40 @@ public:
     }
 };
 ...............
+
+
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k)
+    {
+        //time complexity: O(n.logn)
+        //space complexity: O(n)
+
+        //to store final answer
+        vector<int> ans;
+        //to store {element:frequency} 
+        unordered_map<int,int> ump;   
+        //to store 'k most-frequent' elements
+        priority_queue<pair<int,int>> maxheap; 
+
+        //storing the frequency of each element in the map(ump)
+        for(auto it:nums)
+            ump[it]++;
+
+        //pushing {frequency,element} in the priority_queue(it will automatically put elements with larger frequencies at the top(root-node))
+        for(auto it:ump)
+            maxheap.push({it.second,it.first});
+
+        //loop to extract 'k' most frequent elements from maxheap
+        while(k--)
+        {
+            //inserting element with 'highest frequency' in the answer(ans)
+            ans.push_back(maxheap.top().second);
+            //removing it from maxheap
+            maxheap.pop();
+        }
+
+        //returning 'top 'k' frequent elements'
+        return ans;
+    }
+};
