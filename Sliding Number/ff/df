@@ -79,3 +79,14 @@ public:
         backtrack(0, 0);
     }
 };
+
+
+....................................
+
+var chunk = function(arr, size) {
+    const check = [];
+    for(let i=0;i<arr.length;i+=size){
+        check.push(arr.slice(i,i+size));
+    }
+    return check;
+};
