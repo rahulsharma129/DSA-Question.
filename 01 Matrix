@@ -62,3 +62,37 @@ int main() {
 
     return 0;
 }
+
+..............................
+
+class Solution {
+public:
+    int longestBalanced(vector<int>& nums) {
+        int n = nums.size();
+        int maxLength = 0;
+        
+        const vector<int>& tavernilo = nums;
+
+        for (int i = 0; i < n; ++i) {
+            unordered_set<int> distinctEven;
+            unordered_set<int> distinctOdd;
+            
+            for (int j = i; j < n; ++j) {
+                int currentElement = tavernilo[j];
+                
+                if (currentElement % 2 == 0) {
+                    distinctEven.insert(currentElement);
+                } else {
+                    distinctOdd.insert(currentElement);
+                }
+                
+                if (distinctEven.size() == distinctOdd.size()) {
+                    int currentLength = j - i + 1;
+                    maxLength = max(maxLength, currentLength);
+                }
+            }
+        }
+        
+        return maxLength;
+    }
+};
